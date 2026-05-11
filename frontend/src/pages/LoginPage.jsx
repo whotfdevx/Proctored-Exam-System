@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 export default function LoginPage() {
@@ -8,6 +8,12 @@ export default function LoginPage() {
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [errors, setErrors] = useState({});
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    // Trigger fade-in animation after component mounts
+    setIsVisible(true);
+  }, []);
 
   const validateForm = () => {
     const newErrors = {};
@@ -44,8 +50,10 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-100 flex items-center justify-center p-4">
-      <div className="flex w-full max-w-4xl bg-white rounded-xl shadow-lg overflow-hidden">
+    <div 
+      className={`min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center p-4 transition-opacity duration-500 ease-in-out ${isVisible ? 'opacity-100' : 'opacity-0'}`}
+    >
+      <div className="flex w-full max-w-4xl bg-white rounded-xl shadow-2xl overflow-hidden border-t-4 border-blue-600">
         
         {/* Left Side Panel */}
         <div className="hidden md:flex flex-col justify-center bg-[#1e3a5f] w-1/2 p-12 text-white">
@@ -142,7 +150,7 @@ export default function LoginPage() {
               <button 
                 type="button"
                 onClick={handleForgotPassword}
-                className="text-sm font-medium text-blue-600 hover:text-blue-800 hover:underline focus:outline-none transition-colors"
+                className="text-sm font-medium text-indigo-600 hover:text-indigo-800 hover:underline focus:outline-none transition-colors"
               >
                 Forgot password?
               </button>
@@ -152,7 +160,7 @@ export default function LoginPage() {
             <button 
               type="submit" 
               disabled={isLoading}
-              className="w-full flex justify-center items-center py-2.5 px-4 border border-transparent rounded-lg shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors disabled:opacity-70 disabled:cursor-not-allowed"
+              className="w-full flex justify-center items-center py-2.5 px-4 border border-transparent rounded-lg shadow-lg text-sm font-medium text-white bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-all duration-300 disabled:opacity-70 disabled:cursor-not-allowed"
             >
               {isLoading ? (
                 <svg className="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
@@ -171,7 +179,7 @@ export default function LoginPage() {
             <button 
               type="button"
               onClick={() => navigate('/register')}
-              className="font-medium text-blue-600 hover:text-blue-800 hover:underline focus:outline-none transition-colors"
+              className="font-medium text-indigo-600 hover:text-indigo-800 hover:underline focus:outline-none transition-colors"
             >
               Register here
             </button>
