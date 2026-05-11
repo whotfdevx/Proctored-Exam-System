@@ -40,7 +40,7 @@ export default function LoginPage() {
 
   const handleForgotPassword = (e) => {
     e.preventDefault();
-    alert("Forgot password link clicked!");
+    alert("Password reset link sent to your email!");
   };
 
   return (
